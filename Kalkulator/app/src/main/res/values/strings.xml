@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Kalkulator</string>
+    <string name="label1">1</string>
+    <string name="label2">2</string>
+    <string name="label3">3</string>
+    <string name="label4">4</string>
+    <string name="label5">5</string>
+    <string name="label6">6</string>
+    <string name="label7">7</string>
+    <string name="label8">8</string>
+    <string name="label9">9</string>
+    <string name="label0">0</string>
+    <string name="labelAdd">+</string>
+    <string name="labelDiv">/</string>
+    <string name="labelMul">*</string>
+    <string name="labelSub">-</string>
+    <string name="labelEq">=</string>
+    <string name="labelClear">C</string>
+    <string name="placeholderEditText">Wanna calculate something?</string>
+</resources>
