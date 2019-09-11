@@ -12,11 +12,11 @@ public class MainActivity extends AppCompatActivity {
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
             buttonMul, buttonC, buttonEq;
 
-    TextView calcEditText;
+    TextView calcEditText, editText1, editText2;
 
     int mValueOne, mValueTwo;
 
-    boolean calcAddition, mSubtract, calcMultiplication, calcDivision;
+    boolean calcAddition, calcSubtract, calcMultiplication, calcDivision;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         buttonC = (Button) findViewById(R.id.buttonClear);
         buttonEq= (Button) findViewById(R.id.buttonEq);
         calcEditText = (TextView) findViewById(R.id.editText);
+        editText1 = (TextView) findViewById(R.id.editText1);
+        editText2 = (TextView) findViewById(R.id.editText2);
 
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +121,14 @@ public class MainActivity extends AppCompatActivity {
                     calcEditText.setText("");
                 } else {
                     mValueOne = Integer.parseInt(calcEditText.getText() + "");
+
                     calcAddition = true;
+                    calcSubtract = false;
+                    calcMultiplication = false;
+                    calcDivision = false;
+
+                    editText2.setText(String.valueOf(mValueOne));
+                    editText1.setText("+");
                     calcEditText.setText(null);
                 }
             }
@@ -132,7 +141,14 @@ public class MainActivity extends AppCompatActivity {
                     calcEditText.setText("");
                 } else {
                     mValueOne = Integer.parseInt(calcEditText.getText() + "");
-                    mSubtract = true;
+
+                    calcAddition = false;
+                    calcSubtract = true;
+                    calcMultiplication = false;
+                    calcDivision = false;
+
+                    editText2.setText(String.valueOf(mValueOne));
+                    editText1.setText("-");
                     calcEditText.setText(null);
                 }
             }
@@ -145,7 +161,14 @@ public class MainActivity extends AppCompatActivity {
                     calcEditText.setText("");
                 } else {
                     mValueOne = Integer.parseInt(calcEditText.getText() + "");
+
+                    calcAddition = false;
+                    calcSubtract = false;
                     calcMultiplication = true;
+                    calcDivision = false;
+
+                    editText2.setText(String.valueOf(mValueOne));
+                    editText1.setText("*");
                     calcEditText.setText(null);
                 }
             }
@@ -158,7 +181,14 @@ public class MainActivity extends AppCompatActivity {
                     calcEditText.setText("");
                 } else {
                     mValueOne = Integer.parseInt(calcEditText.getText() + "");
+
+                    calcAddition = false;
+                    calcSubtract = false;
+                    calcMultiplication = false;
                     calcDivision = true;
+
+                    editText2.setText(String.valueOf(mValueOne));
+                    editText1.setText("/");
                     calcEditText.setText(null);
                 }
             }
@@ -171,15 +201,16 @@ public class MainActivity extends AppCompatActivity {
                     calcEditText.setText("");
                 } else {
                     mValueTwo = Integer.parseInt(calcEditText.getText() + "");
+                    editText2.setText(String.valueOf(mValueTwo));
 
                     if (calcAddition) {
                         calcEditText.setText(mValueOne + mValueTwo + "");
                         calcAddition = false;
                     }
 
-                    if (mSubtract) {
+                    if (calcSubtract) {
                         calcEditText.setText(mValueOne - mValueTwo + "");
-                        mSubtract = false;
+                        calcSubtract = false;
                     }
 
                     if (calcMultiplication) {
@@ -199,6 +230,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calcEditText.setText("");
+                editText1.setText("");
+                editText2.setText("");
             }
         });
     }
