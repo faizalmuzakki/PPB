@@ -23,23 +23,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button0 = findViewById(R.id.button0);
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
-        button5 = findViewById(R.id.button5);
-        button6 = findViewById(R.id.button6);
-        button7 = findViewById(R.id.button7);
-        button8 = findViewById(R.id.button8);
-        button9 = findViewById(R.id.button9);
-        buttonAdd = findViewById(R.id.buttonAdd);
-        buttonSub = findViewById(R.id.buttonSub);
-        buttonMul = findViewById(R.id.buttonMul);
-        buttonDiv= findViewById(R.id.buttonDiv);
-        buttonC = findViewById(R.id.buttonClear);
-        buttonEq= findViewById(R.id.buttonEq);
-        calcEditText = findViewById(R.id.editText);
+        button0 = (Button) findViewById(R.id.button0);
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
+        button5 = (Button) findViewById(R.id.button5);
+        button6 = (Button) findViewById(R.id.button6);
+        button7 = (Button) findViewById(R.id.button7);
+        button8 = (Button) findViewById(R.id.button8);
+        button9 = (Button) findViewById(R.id.button9);
+        buttonAdd = (Button) findViewById(R.id.buttonAdd);
+        buttonSub = (Button) findViewById(R.id.buttonSub);
+        buttonMul = (Button) findViewById(R.id.buttonMul);
+        buttonDiv= (Button) findViewById(R.id.buttonDiv);
+        buttonC = (Button) findViewById(R.id.buttonClear);
+        buttonEq= (Button) findViewById(R.id.buttonEq);
+        calcEditText = (TextView) findViewById(R.id.editText);
 
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,12 +112,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (calcEditText == null) {
+                if (calcEditText.getText() == "") {
                     calcEditText.setText("");
                 } else {
                     mValueOne = Integer.parseInt(calcEditText.getText() + "");
@@ -130,53 +128,69 @@ public class MainActivity extends AppCompatActivity {
         buttonSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mValueOne = Integer.parseInt(calcEditText.getText() + "");
-                mSubtract = true;
-                calcEditText.setText(null);
+                if (calcEditText.getText() == "") {
+                    calcEditText.setText("");
+                } else {
+                    mValueOne = Integer.parseInt(calcEditText.getText() + "");
+                    mSubtract = true;
+                    calcEditText.setText(null);
+                }
             }
         });
 
         buttonMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mValueOne = Integer.parseInt(calcEditText.getText() + "");
-                calcMultiplication = true;
-                calcEditText.setText(null);
+                if (calcEditText.getText() == "") {
+                    calcEditText.setText("");
+                } else {
+                    mValueOne = Integer.parseInt(calcEditText.getText() + "");
+                    calcMultiplication = true;
+                    calcEditText.setText(null);
+                }
             }
         });
 
         buttonDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mValueOne = Integer.parseInt(calcEditText.getText() + "");
-                calcDivision = true;
-                calcEditText.setText(null);
+                if (calcEditText.getText() == "") {
+                    calcEditText.setText("");
+                } else {
+                    mValueOne = Integer.parseInt(calcEditText.getText() + "");
+                    calcDivision = true;
+                    calcEditText.setText(null);
+                }
             }
         });
 
         buttonEq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mValueTwo = Integer.parseInt(calcEditText.getText() + "");
+                if (calcEditText.getText() == "") {
+                    calcEditText.setText("");
+                } else {
+                    mValueTwo = Integer.parseInt(calcEditText.getText() + "");
 
-                if (calcAddition) {
-                    calcEditText.setText(mValueOne + mValueTwo + "");
-                    calcAddition = false;
-                }
+                    if (calcAddition) {
+                        calcEditText.setText(mValueOne + mValueTwo + "");
+                        calcAddition = false;
+                    }
 
-                if (mSubtract) {
-                    calcEditText.setText(mValueOne - mValueTwo + "");
-                    mSubtract = false;
-                }
+                    if (mSubtract) {
+                        calcEditText.setText(mValueOne - mValueTwo + "");
+                        mSubtract = false;
+                    }
 
-                if (calcMultiplication) {
-                    calcEditText.setText(mValueOne * mValueTwo + "");
-                    calcMultiplication = false;
-                }
+                    if (calcMultiplication) {
+                        calcEditText.setText(mValueOne * mValueTwo + "");
+                        calcMultiplication = false;
+                    }
 
-                if (calcDivision) {
-                    calcEditText.setText(mValueOne / mValueTwo + "");
-                    calcDivision = false;
+                    if (calcDivision) {
+                        calcEditText.setText(mValueOne / mValueTwo + "");
+                        calcDivision = false;
+                    }
                 }
             }
         });
