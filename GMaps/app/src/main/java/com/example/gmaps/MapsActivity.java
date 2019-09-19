@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -54,14 +55,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         zoom = findViewById(R.id.edZoom);
     }
 
+    private boolean check(EditText ttw){
+        if(ttw.getText().toString().matches("")){
+            Toast.makeText(MapsActivity.this, ttw.getHint().toString()+" is empty", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+    }
+
     View.OnClickListener op = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.d("RAW_zoom", zoom.getText().toString());
-            if(zoom.getText().toString().matches(""))
+            if(zoom.getText().toString().matches("")){
                 dblzoom = 10.0f;
+                zoom.setText(String.valueOf(dblzoom));
+            }
             else
                 dblzoom = Float.parseFloat(zoom.getText().toString());
+
+            if(check(lat) || check(lon))
+                return;
 
             switch (v.getId()){
                 case R.id.btnGo:
@@ -91,11 +104,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             goToPeta(lat_search, lon_search, dblzoom);
 
-            lat.setText(String.valueOf(lat_search));
-            lon.setText(String.valueOf(lon_search));
+            dbllat = Double.parseDouble(lat.getText().toString());
+            dbllng = Double.parseDouble(lon.getText().toString());
+            hitungJarak(dbllat, dbllng, lat_search, lon_search);
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private void hitungJarak(double latAsal, Double lngAsal, double latTujuan, double lngTujuan){
+        Location asal = new Location("asal");
+        Location tujuan = new Location("tujuan");
+        tujuan.setLatitude(latTujuan);
+        tujuan.setLatitude(lngTujuan);
+        asal.setLatitude(latAsal);
+        asal.setLongitude(lngAsal);
+        float jarak = asal.distanceTo(tujuan)/1000;
+        String jaraknya = String.valueOf(jarak);
+        Toast.makeText(getBaseContext(), "Distance : " + jaraknya +" km ", Toast.LENGTH_LONG).show();
     }
 
     private void goToLocation(){
