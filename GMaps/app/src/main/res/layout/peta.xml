@@ -16,7 +16,7 @@
             android:layout_weight="1"
             android:hint="@string/lat"
             android:gravity="center"
-            android:inputType="numberDecimal" />
+            android:inputType="numberSigned|numberDecimal" />
 
         <EditText
             android:id="@+id/edLon"
@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:hint="@string/lon"
             android:gravity="center"
-            android:inputType="numberDecimal" />
+            android:inputType="numberSigned|numberDecimal" />
     </LinearLayout>
 
     <LinearLayout

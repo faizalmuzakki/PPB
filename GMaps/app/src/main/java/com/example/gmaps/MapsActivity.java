@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -111,13 +112,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void hitungJarak(double latAsal, Double lngAsal, double latTujuan, double lngTujuan){
+    private void hitungJarak(Double latAsal, Double lngAsal, Double latTujuan, Double lngTujuan){
         Location asal = new Location("asal");
         Location tujuan = new Location("tujuan");
         tujuan.setLatitude(latTujuan);
-        tujuan.setLatitude(lngTujuan);
+        tujuan.setLongitude(lngTujuan);
         asal.setLatitude(latAsal);
         asal.setLongitude(lngAsal);
+        Log.d("LAT_ASAL", String.valueOf(asal.getLatitude()));
+        Log.d("LON_ASAL", String.valueOf(asal.getLongitude()));
+        Log.d("LAT_TUJUAN", String.valueOf(tujuan.getLatitude()));
+        Log.d("LON_TUJUAN", String.valueOf(tujuan.getLongitude()));
         float jarak = asal.distanceTo(tujuan)/1000;
         String jaraknya = String.valueOf(jarak);
         Toast.makeText(getBaseContext(), "Distance : " + jaraknya +" km ", Toast.LENGTH_LONG).show();
@@ -126,9 +131,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void goToLocation(){
         dbllat = Double.parseDouble(lat.getText().toString());
         dbllng = Double.parseDouble(lon.getText().toString());
-
-        lat.setText(String.valueOf(lat_search));
-        lon.setText(String.valueOf(lon_search));
 
         Toast.makeText(this,"Move to Lat:" +dbllat + " Long:" +dbllng, Toast.LENGTH_LONG).show();
         goToPeta(dbllat, dbllng, dblzoom);
